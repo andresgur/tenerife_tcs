@@ -1,5 +1,5 @@
-# tenerife_tcs
-Data reduction for the MUSCAT2 camera on the Telescopio Carlos Sanchez on the Observatorio de Tenerife
+# tenerife-muscat2-tcs
+Data reduction for the MUSCAT2 camera on the Telescopio Carlos Sanchez (TCS) on the Observatorio de Tenerife
 
 The data needs to be stored into a single directory, with the flats and darks in separate directories. This is how a typical workflow would look like:
 
