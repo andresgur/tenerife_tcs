@@ -1,5 +1,5 @@
 # tenerife-muscat2-tcs
-Data reduction to create RGB images using the MUSCAT2 camera on the Telescopio Carlos Sanchez (TCS) on the Observatorio de Tenerife
+Data reduction to create RGB images/perform aperture photometry using the MUSCAT2 camera on the Telescopio Carlos Sanchez (TCS) on the Observatorio de Tenerife
 
 The data needs to be stored into a single directory, with the flats and darks in separate directories. This is how a typical workflow would look like to a RGB image:
 
