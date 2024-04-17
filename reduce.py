@@ -44,7 +44,8 @@ def create_master_flat(filter):
         raise ValueError("No flats were found!")
     print("Found %d flats files" % len(flats))
     masterflat = np.mean(sigclip(flats, axis=0), axis=0)
-    return masterflat
+    # renormalize the flat at the end
+    return masterflat / np.mean(masterflat)
 
 def cleanimage(image):
     current_fits = fits.open(image)
@@ -54,7 +55,7 @@ def cleanimage(image):
     masterdark = create_master_dark(exptime, filter)
     cleandata = current_data - masterdark.data
     masterflat = create_master_flat(filter)
-    normalized_data = cleandata /  masterflat.data
+    normalized_data = cleandata / masterflat.data
     normalized_data[np.isnan(masterflat)] = np.nan
     current_fits[0].data = normalized_data
     current_fits[0].header["COMMENT"] = "Dark subtracted"
@@ -65,7 +66,6 @@ ap = argparse.ArgumentParser(description='Apply flat correction to a series of s
 ap.add_argument("input_images", nargs="+", help="Input images to be flat-normalized", type=str)
 ap.add_argument("-f", "--flat_folder", nargs=1, help="Folder containing the flats", type=str)
 ap.add_argument("-d", "--dark_folder", nargs=1, help="Folder containing the darks", type=str)
-
 args = ap.parse_args()
 
 images = args.input_images
