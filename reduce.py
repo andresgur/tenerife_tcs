@@ -5,6 +5,7 @@ from astropy import stats
 import glob
 from multiprocessing import Pool
 import multiprocessing as mp
+import warnings
 
 mp.set_start_method("fork")
 
@@ -21,6 +22,9 @@ def create_master_dark(exptime, filter):
         darkfilter = darkfits[0].header["FILTER"]
         if (darkexptime == exptime) & (darkfilter == filter):
             darks.append(darkfits[0].data)
+        else:
+            warnings.warn(f"{darkfile} exposure time ({darkexptime:.2f}s) did not match data exposure time ({exptime:.2f}s). Skipping it")
+    
     if len(darks)==0:
         raise ValueError("No darks were found!")
     print("Found %d dark files" % len(darks))
@@ -38,6 +42,8 @@ def create_master_flat(filter):
         flatfilter = flatfits[0].header["FILTER"]
         if (flatfilter == filter):
             flats.append(flatfits[0].data)
+        else:
+            warnings.warn(f"{flatfile} filter ({flatfile}) did not match data filter ({filter}). Skipping it")
 
     if len(flats)==0:
         raise ValueError("No flats were found!")
