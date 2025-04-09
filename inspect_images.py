@@ -1,5 +1,4 @@
 from astropy.io import fits
-import numpy as np
 import argparse
 
 ap = argparse.ArgumentParser(description='Print information from the images headers')
