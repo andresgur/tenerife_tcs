@@ -1,9 +1,7 @@
 from astropy.io import fits
 import numpy as np
 import argparse
-import astroalign as aa
 from astropy import stats
-import matplotlib.pyplot as plt
 
 sigclip = stats.SigmaClip(sigma=4, maxiters=5)
 
